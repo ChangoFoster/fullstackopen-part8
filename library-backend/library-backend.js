@@ -6,8 +6,6 @@ const Book = require('./models/book')
 const Author = require('./models/author')
 const User = require('./models/user')
 
-
-
 mongoose.set('useFindAndModify', false)
 
 const MONGODB_URI = "mongodb+srv://fullstack:fullstackpassword@cluster0-ioezy.mongodb.net/library-app?retryWrites=true&w=majority"
@@ -16,7 +14,9 @@ console.log('connecting to', MONGODB_URI)
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => { console.log('connected to MongoDB') })
-  .catch((error) => { console.log('error connection to MongoDB:', error.message) })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
 
 const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
 
@@ -112,15 +112,15 @@ const resolvers = {
       }
 
       if(!args.title || args.title.length < 2) {
-        throw new UserInputError("You must enter a title at least 2 characters long", {
-          invalidArgs: args.title,
-        })
+        throw new UserInputError("You must enter a title at least 2 characters long",
+          { invalidArgs: args.title }
+        )
       }
 
       if(!args.author || args.author.length < 4) {
-        throw new UserInputError("You must enter an author name at least 2 characters long", {
-          invalidArgs: args.author,
-        })
+        throw new UserInputError("You must enter an author name at least 2 characters long",
+          { invalidArgs: args.author}
+        )
       }
 
       if(!args.published || args.published < 1000 || args.published > 2050) {
@@ -146,7 +146,9 @@ const resolvers = {
 
       try {
         await book.save()
-        await book.populate('author', { name: 1, born: 1, id: 1 }).execPopulate()
+        await book
+          .populate('author', { name: 1, born: 1, id: 1 })
+          .execPopulate()
         author.books = author.books.concat(book._id)
         await author.save()
       } catch (error) {

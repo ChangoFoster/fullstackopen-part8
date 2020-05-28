@@ -27,32 +27,6 @@ const Authors = ({setError, show, token, authors}) => {
     return null
   }
 
-  const showForm = () => {
-    return(
-      <>
-        <h3>Update author</h3>
-        <form onSubmit={submit}>
-          <label>
-            Select author:
-            <select value={name} onChange={({ target }) => setName(target.value)}>
-              {authors.map(a =>
-                <option key={a.name} value={a.name}>{a.name}</option>
-              )}
-            </select>
-          </label>
-          <br />
-          <input
-            type='number'
-            value={born}
-            onChange={({ target }) => setBorn(Number(target.value))}
-          />
-          <br />
-          <button type="submit">Update author</button>
-        </form>
-      </>
-    )
-  }
-
   const submit = (event) => {
     event.preventDefault()
 
@@ -83,7 +57,32 @@ const Authors = ({setError, show, token, authors}) => {
           )}
         </tbody>
       </table>
-      {token && showForm()}
+      {token &&
+        <>
+          <h3>Update author</h3>
+          <form onSubmit={submit}>
+            <label>
+              Select author:
+              <select
+                value={name}
+                onChange={({ target }) => setName(target.value)}
+              >
+                {authors.map(a =>
+                  <option key={a.name} value={a.name}>{a.name}</option>
+                )}
+              </select>
+            </label>
+            <br />
+            <input
+              type='number'
+              value={born}
+              onChange={({ target }) => setBorn(Number(target.value))}
+            />
+            <br />
+            <button type="submit">Update author</button>
+          </form>
+        </>
+      }
     </div>
   )
 }

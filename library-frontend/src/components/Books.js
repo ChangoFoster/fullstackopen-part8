@@ -12,13 +12,13 @@ const Books = ({show, books}) => {
   }, []) // eslint-disable-line
 
   useEffect(() => {
-    if (result.data) {
+    if(result.data) {
       setGenreBooks(result.data.allBooks)
     }
   }, [result.data])
 
   useEffect(() => {
-    if (books) {
+    if(books) {
       setGenres([...new Set(books.map(a => a.genres[0]))])
     }
   }, [books])
@@ -27,7 +27,7 @@ const Books = ({show, books}) => {
     getBooks({ variables: { genre: genre } })
   }
 
-  if (!show) {
+  if(!show) {
     return null
   }
 

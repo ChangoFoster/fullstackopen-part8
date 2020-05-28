@@ -9,14 +9,16 @@ const Recommendations = ({show, books, me}) => {
     }
   }, [me])  // eslint-disable-line
 
-  if (!show) {
+  if(!show) {
     return null
   }
 
   return(
     <div>
       <h2>Recommendations</h2>
-      <p>Books from your favourite genre <strong>{me.favoriteGenre}</strong></p>
+      <p>
+        Books from your favourite genre <strong>{me.favoriteGenre}</strong>
+      </p>
       <div>{filter}</div>
       <div>
         {books

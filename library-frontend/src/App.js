@@ -74,7 +74,11 @@ const App = () => {
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
         {token && <button onClick={() => setPage('add')}>add book</button>}
-        {token && <button onClick={() => setPage('recommendations')}>recommendations</button>}
+        {token &&
+          <button onClick={() => setPage('recommendations')}>
+            recommendations
+          </button>
+        }
         {token && <button onClick={logout}>logout</button>}
         {!token && <button onClick={() => setPage('login')}>login</button>}
       </div>

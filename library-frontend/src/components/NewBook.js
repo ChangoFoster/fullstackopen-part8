@@ -22,7 +22,7 @@ const NewBook = ({setError, updateCacheWith, show}) => {
     }
   })
 
-  if (!show) {
+  if(!show) {
     return null
   }
 
